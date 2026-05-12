@@ -1,5 +1,5 @@
 source_system,source_field,canonical_field,transform,transform_null_handling,null_rule,data_type,conflict_rule,business_owner,acceptance_criterion_sql
-GW-A,failure_ty,canonical,LOOKUP,Map GW-A,REJECT,If failure_timestamp is NULL,VARCHAR,CANONICAL,Ops Lead,SELECT COUNT(*) FROM payment_failure_master WHERE source_system='GW-A' AND canonical_failure_category IS NULL -- Expected: 0
+GW-A,failure_ty,canonical,LOOKUP,Map GW-A,REJECT,If failure_timestamp is NULL,VARCHAR,CANONICAL,Ops Lead,'SELECT COUNT(*) FROM payment_failure_master WHERE source_system='GW-A' AND canonical_failure_category IS NULL -- Expected: 0'
 GW-A,transaction,transaction,DIRECT,Copy as-is,REJECT,Transaction ID is NULL,VARCHAR,N/A,Ops Lead,SELECT COUNT(*) FROM payment_failure_master WHERE source_system='GW-A' AND transaction_id IS NULL -- Expected: 0
 GW-A,event_tim,failure_ti,DIRECT,Copy as-is,REJECT,Cannot process,TIMESTAMP,N/A,Engineering,SELECT COUNT(*) FROM payment_failure_master WHERE source_system='GW-A' AND failure_timestamp IS NULL -- Expected: 0
 GW-A,amount_transaction,DERIVED,Divide by,ALERT,Allow null,DECIMAL,N/A,Finance Ops,SELECT COUNT(*) FROM payment_failure_master WHERE source_system='GW-A' AND transaction_amount_inr < 0 -- Expected: 0
